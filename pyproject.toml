@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "dj-tg-template"
+version = "0.1.0"
+description = ""
+authors = ["Никита <ruvemaximus@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1"
+python-telegram-bot = "^21.4"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+watchfiles = "^0.23.0"
+ruff = "^0.6.2"
+
+
+[tool.ruff]
+line-length = 120
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -3,6 +3,8 @@
 * `python-telegram-bot` - [документация](https://python-telegram-bot.org/)
 
 ### Разработка
+* Для управления зависимостями используется `poetry`
+
 ```bash
 watchfiles --filter python './bot.py' .
 ```
