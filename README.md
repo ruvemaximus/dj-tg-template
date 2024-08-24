@@ -6,5 +6,9 @@
 * Для управления зависимостями используется `poetry`
 
 ```bash
-watchfiles --filter python './bot.py' .
+poetry run watchfiles --filter python './bot.py' .
+```
+
+```bash
+poetry run ./manage.py runserver
 ```
