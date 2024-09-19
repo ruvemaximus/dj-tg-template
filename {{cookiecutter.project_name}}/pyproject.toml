@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dj-tg-template"
+name = "{{cookiecutter.project_name}}"
 version = "0.1.0"
 description = ""
 authors = ["Никита <ruvemaximus@gmail.com>"]
