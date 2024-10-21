@@ -2,7 +2,7 @@
 name = "{{cookiecutter.project_name}}"
 version = "0.1.0"
 description = ""
-authors = ["Никита <ruvemaximus@gmail.com>"]
+authors = ["{{cookiecutter.author}}"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -11,20 +11,27 @@ django = "^5.1"
 python-telegram-bot = "^21.4"
 python-dotenv = "^1.0.1"
 
-
 [tool.poetry.group.dev.dependencies]
 watchfiles = "^0.23.0"
 ruff = "^0.6.2"
-
+pytest = "^8.3.3"
+pytest-django = "^4.9.0"
 
 [tool.ruff]
 line-length = 120
 extend-exclude = ["**/migrations/*.py", "**/*.js", "**/*.css", "templates/"]
 
-
 [tool.ruff.lint]
-extend-select = ["I"]  # сортировка имбортов
+extend-select = [
+    "I",   # isort
+    "SIM", # flake8-simplify
+    "RET", # flake8-return
+    "DJ",  # flake8-django
+]
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tg_bot.settings"
+python_files = ["tests.py", "test_*.py"]
 
 [build-system]
 requires = ["poetry-core"]
