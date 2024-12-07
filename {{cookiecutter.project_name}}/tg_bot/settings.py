@@ -13,9 +13,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
 
-load_dotenv()
+    load_dotenv()
+except ImportError:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,9 +33,7 @@ SECRET_KEY = os.environ.get(
 )
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "false") in ("1", "true")
-
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
-
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 ADMIN_URL = os.environ.get("DJANGO_ADMIN_URL", "admin/")
 
 
@@ -156,13 +157,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
+USE_I18N = True
 LANGUAGE_CODE = "ru-ru"
 
+USE_TZ = True
 TIME_ZONE = "Asia/Irkutsk"
 
-USE_I18N = True
-
-USE_TZ = True
+USE_L10N = False  # Отключаем локализацию
+TIME_FORMAT = "H:i"  # 24-часовой формат, например, 17:00
 
 
 # Static files (CSS, JavaScript, Images)

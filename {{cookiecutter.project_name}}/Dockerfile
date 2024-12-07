@@ -10,7 +10,7 @@ RUN apt update && apt install -y supervisor && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip && \
-    pip install --no-cache-dir django python-telegram-bot pillow python-dotenv && \
+    pip install --no-cache-dir django python-telegram-bot pillow && \
     mkdir -p /var/log/supervisor && \
     /app/manage.py migrate
 

@@ -7,11 +7,14 @@
 
 ### Разработка
 * Для управления зависимостями используется `poetry`
+* `ruff` в качестве линтера и форматтера
 
+#### Автоматический перезапуск Telegram-бота при редактировании кода
 ```bash
 poetry run watchfiles --filter python './bot.py' .
 ```
 
+#### Запуск dev-сервера django
 ```bash
 poetry run ./manage.py runserver
 ```

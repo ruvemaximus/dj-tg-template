@@ -16,4 +16,7 @@ async def cmd_set_commands(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     await bot.set_my_commands([("start", "Начать диалог")])
 
 
-HANDLERS = [CommandHandler("start", cmd_start), CommandHandler("set_commands", cmd_set_commands)]
+HANDLERS = [
+    CommandHandler("start", cmd_start),
+    CommandHandler("set_commands", cmd_set_commands),
+]

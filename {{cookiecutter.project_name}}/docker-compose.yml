@@ -4,3 +4,4 @@ services:
     build: .
     container_name: "{{cookiecutter.project_name}}"
     restart: always
+    env_file: ".env"
