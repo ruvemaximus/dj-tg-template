@@ -1,7 +1,7 @@
 # Шаблон для Telegram-ботов
 Этот шаблон использует [cookiecutter](https://github.com/cookiecutter/cookiecutter)
 
-## Использоваение
+## Использование
 
 ### :sparkles: Создание нового проекта
 ```bash

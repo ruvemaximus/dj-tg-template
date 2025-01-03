@@ -6,8 +6,9 @@ from contextlib import suppress
 from importlib import import_module
 
 import django
-from core.logger import init_logger
 from telegram.ext import Application
+
+from core.logger import init_logger
 
 with suppress(ImportError):
     from dotenv import load_dotenv
