@@ -6,15 +6,15 @@
 * `python-telegram-bot` - [документация](https://python-telegram-bot.org/)
 
 ### Разработка
-* Для управления зависимостями используется `poetry`
+* Для управления зависимостями используется `uv`
 * `ruff` в качестве линтера и форматтера
 
 #### Автоматический перезапуск Telegram-бота при редактировании кода
 ```bash
-poetry run watchfiles --filter python './bot.py' .
+uv run watchfiles --filter python './bot.py' .
 ```
 
 #### Запуск dev-сервера django
 ```bash
-poetry run ./manage.py runserver
+uv run ./manage.py runserver
 ```
