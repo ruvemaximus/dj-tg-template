@@ -13,5 +13,5 @@ cookiecutter gh:ruvemaximus/dj-tg-template
 > Следующая команда может переписать уже существующие файлы проекта.
 
 ```bash
-cookiecutter gh:ruvemaximus/dj-tg-template --output-dir ..  --overwrite-if-exists
+cookiecutter gh:ruvemaximus/dj-tg-template --output-dir .. --overwrite-if-exists
 ```
