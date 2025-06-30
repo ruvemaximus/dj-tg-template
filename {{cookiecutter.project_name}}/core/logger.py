@@ -37,4 +37,6 @@ def init_logger(name: str, level=logging.INFO):
         handlers=[console_handler],
     )
 
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+
     return logger

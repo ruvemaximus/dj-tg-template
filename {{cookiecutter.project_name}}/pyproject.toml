@@ -36,6 +36,3 @@ extend-select = [
 DJANGO_SETTINGS_MODULE = "tg_bot.settings"
 python_files = ["tests.py", "test_*.py"]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"

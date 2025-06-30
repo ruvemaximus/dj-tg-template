@@ -41,10 +41,12 @@ class Command(BaseCommand):
             if app_name.startswith("django."):
                 continue
 
-            module_handlers = import_module(f"{app_name}.router").HANDLERS
-            application.add_handlers(module_handlers)
-            logging.info(f"Added {len(module_handlers)} handlers from {app_name}")
+            try:
+                module_handlers = import_module(f"{app_name}.router").HANDLERS
+                application.add_handlers(module_handlers)
+                logging.info(f"Added {len(module_handlers)} handlers from {app_name}")
+            except ModuleNotFoundError:
+                logging.warning(f"Module '{app_name}.router' not found")
 
         application.add_error_handler(error_handler)
-
         application.run_polling()
