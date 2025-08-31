@@ -35,6 +35,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get("DJANGO_DEBUG", "false") in ("1", "true")
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 ADMIN_URL = os.environ.get("DJANGO_ADMIN_URL", "admin/")
+ADMIN_PORT = os.environ.get("DJANGO_ADMIN_PORT", "2123")
 
 
 # Application definition

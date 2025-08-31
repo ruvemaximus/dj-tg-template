@@ -1,9 +1,10 @@
+import asyncio
 import logging
 from importlib import import_module
 from os import environ
 
 from django.conf import settings
-from django.core.management import BaseCommand
+from django.core.management import BaseCommand, call_command
 from telegram import Update
 from telegram.ext import Application, ContextTypes
 
@@ -31,11 +32,18 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
         logging.error("Failed to send error message: %s", send_error)
 
 
+async def runbot(application: Application):
+    async with application:
+        await application.start()
+        _ = call_command('runserver', f'0.0.0.0:{settings.ADMIN_PORT}')
+        await application.stop()
+
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         init_logger("bot")
 
-        application = Application.builder().token(environ.get("TG_BOT_TOKEN")).build()
+        application = Application.builder().token(environ.get("TG_BOT_TOKEN", "")).build()
 
         for app_name in settings.INSTALLED_APPS:
             if app_name.startswith("django."):
@@ -49,4 +57,5 @@ class Command(BaseCommand):
                 logging.warning(f"Module '{app_name}.router' not found")
 
         application.add_error_handler(error_handler)
-        application.run_polling()
+
+        asyncio.run(runbot(application))
