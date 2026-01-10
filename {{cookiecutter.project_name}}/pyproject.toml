@@ -10,6 +10,7 @@ dependencies = [
     "django>=5.2",
     "pillow>=11.2.1",
     "python-telegram-bot>=22.0",
+    "uvicorn>=0.37.0",
 ]
 readme = "README.md"
 

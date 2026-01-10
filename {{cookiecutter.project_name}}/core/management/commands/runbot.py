@@ -1,7 +1,8 @@
+import asyncio
 import logging
 from importlib import import_module
-from os import environ
 
+import uvicorn
 from django.conf import settings
 from django.core.management import BaseCommand
 from telegram import Update
@@ -9,6 +10,7 @@ from telegram.ext import Application, ContextTypes
 
 from accounts.models import User
 from core.logger import init_logger
+from core.utils import build_app
 
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -30,12 +32,31 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     except Exception as send_error:
         logging.error("Failed to send error message: %s", send_error)
 
+async def run_bot(application: Application):
+    webserver = uvicorn.Server(
+        config=uvicorn.Config(
+            app="tg_bot.asgi:application",
+            port=settings.ADMIN_PORT,
+            log_level=logging.INFO if settings.DEBUG else logging.WARNING,
+            host="127.0.0.1" if settings.DEBUG else "0.0.0.0",
+            use_colors=settings.DEBUG,
+            lifespan="off",
+        )
+    )
+
+    async with application:
+        await application.updater.start_polling()
+        await application.start()
+        await webserver.serve()
+        await application.updater.stop()
+        await application.stop()
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         init_logger("bot")
 
-        application = Application.builder().token(environ.get("TG_BOT_TOKEN")).build()
+        application: Application = build_app()
 
         for app_name in settings.INSTALLED_APPS:
             if app_name.startswith("django."):
@@ -49,4 +70,4 @@ class Command(BaseCommand):
                 logging.warning(f"Module '{app_name}.router' not found")
 
         application.add_error_handler(error_handler)
-        application.run_polling()
+        asyncio.run(run_bot(application))
